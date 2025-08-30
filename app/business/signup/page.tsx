@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { Building2, Upload, MapPin, Globe, Mail } from 'lucide-react'
-import { Business, WorkCultureTag } from '@/types'
-import { db, storage } from '@/lib/firebase'
-import { collection, addDoc } from 'firebase/firestore'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import toast from 'react-hot-toast'
+import { Business, WorkCultureTag } from '../../../types'
+// import { db, storage } from '@/lib/firebase'
+// import { collection, addDoc } from 'firebase/firestore'
+// import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+// import toast from 'react-hot-toast'
 
 const workCultureOptions: WorkCultureTag[] = [
   'autocratic', 'democratic', 'collaborative', 'hierarchical',
@@ -42,32 +42,30 @@ export default function BusinessSignupPage() {
     )
   }
 
+  // Mock function - replace with real Firebase later
   const uploadImages = async (files: File[]): Promise<string[]> => {
-    const uploadPromises = files.map(async (file) => {
-      const storageRef = ref(storage, `business-images/${Date.now()}-${file.name}`)
-      const snapshot = await uploadBytes(storageRef, file)
-      return getDownloadURL(snapshot.ref)
-    })
-    return Promise.all(uploadPromises)
+    // Simulate upload delay
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return files.map(file => `mock-url-${file.name}`)
   }
 
   const onSubmit = async (data: Partial<Business>) => {
     if (selectedImages.length === 0) {
-      toast.error('Please upload at least one business image')
+      alert('Please upload at least one business image')
       return
     }
 
     if (selectedWorkCulture.length === 0) {
-      toast.error('Please select at least one work culture tag')
+      alert('Please select at least one work culture tag')
       return
     }
 
     setUploading(true)
     try {
-      // Upload images
+      // Mock image upload
       const imageUrls = await uploadImages(selectedImages)
       
-      // Create business profile
+      // Mock business profile creation
       const businessData: Partial<Business> = {
         ...data,
         images: imageUrls,
@@ -76,15 +74,14 @@ export default function BusinessSignupPage() {
         updatedAt: new Date(),
       }
 
-      const docRef = await addDoc(collection(db, 'businesses'), businessData)
+      console.log('Business profile data:', businessData)
+      alert('Business profile created successfully! (Mock)')
       
-      toast.success('Business profile created successfully!')
-      
-      // Redirect to business dashboard
-      router.push(`/business/dashboard/${docRef.id}`)
+      // Redirect to home for now
+      router.push('/')
     } catch (error) {
       console.error('Error creating business profile:', error)
-      toast.error('Failed to create business profile')
+      alert('Failed to create business profile')
     } finally {
       setUploading(false)
     }

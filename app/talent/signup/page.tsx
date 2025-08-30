@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { User, Upload, MapPin, Calendar, Brain, Users, FileText } from 'lucide-react'
-import { Talent, PersonalityTag, WorkCultureTag } from '@/types'
-import { db, storage } from '@/lib/firebase'
-import { collection, addDoc } from 'firebase/firestore'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import toast from 'react-hot-toast'
+import { Talent, PersonalityTag, WorkCultureTag } from '../../../types'
+// import { db, storage } from '@/lib/firebase'
+// import { collection, addDoc } from 'firebase/firestore'
+// import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+// import toast from 'react-hot-toast'
 
 const personalityOptions: PersonalityTag[] = [
   'team-worker', 'independent', 'leader', 'creative', 'analytical',
@@ -79,10 +79,10 @@ export default function TalentSignupPage() {
       // Add suggested skills
       setSelectedSkills(prev => [...new Set([...prev, ...suggestedSkills.slice(0, 5)])])
       
-      toast.success('CV parsed successfully! Skills and experience auto-filled.')
+      alert('CV parsed successfully! Skills and experience auto-filled.')
     } catch (error) {
       console.error('Error parsing CV:', error)
-      toast.error('Failed to parse CV. Please fill in details manually.')
+      alert('Failed to parse CV. Please fill in details manually.')
     } finally {
       setParsingCV(false)
     }
@@ -140,16 +140,18 @@ export default function TalentSignupPage() {
 
     // Upload resume
     if (resumeFile) {
-      const resumeRef = ref(storage, `resumes/${Date.now()}-${resumeFile.name}`)
-      const snapshot = await uploadBytes(resumeRef, resumeFile)
-      uploads.resume = await getDownloadURL(snapshot.ref)
+      // const resumeRef = ref(storage, `resumes/${Date.now()}-${resumeFile.name}`)
+      // const snapshot = await uploadBytes(resumeRef, resumeFile)
+      // uploads.resume = await getDownloadURL(snapshot.ref)
+      uploads.resume = `https://via.placeholder.com/150` // Mock URL
     }
 
     // Upload portfolio files
     const portfolioPromises = portfolioFiles.map(async (file) => {
-      const portfolioRef = ref(storage, `portfolio/${Date.now()}-${file.name}`)
-      const snapshot = await uploadBytes(portfolioRef, file)
-      return getDownloadURL(snapshot.ref)
+      // const portfolioRef = ref(storage, `portfolio/${Date.now()}-${file.name}`)
+      // const snapshot = await uploadBytes(portfolioRef, file)
+      // return getDownloadURL(snapshot.ref)
+      return `https://via.placeholder.com/150` // Mock URL
     })
     uploads.portfolio = await Promise.all(portfolioPromises)
 
@@ -158,17 +160,17 @@ export default function TalentSignupPage() {
 
   const onSubmit = async (data: Partial<Talent>) => {
     if (selectedSkills.length === 0) {
-      toast.error('Please add at least one skill')
+      alert('Please add at least one skill')
       return
     }
 
     if (selectedPersonality.length === 0) {
-      toast.error('Please select at least one personality trait')
+      alert('Please select at least one personality trait')
       return
     }
 
     if (selectedWorkCulture.length === 0) {
-      toast.error('Please select at least one work culture preference')
+      alert('Please select at least one work culture preference')
       return
     }
 
@@ -191,15 +193,14 @@ export default function TalentSignupPage() {
         updatedAt: new Date(),
       }
 
-      const docRef = await addDoc(collection(db, 'talents'), talentData)
-      
-      toast.success('Talent profile created successfully!')
+      // const docRef = await addDoc(collection(db, 'talents'), talentData)
+      // toast.success('Talent profile created successfully!')
       
       // Redirect to talent dashboard
-      router.push(`/talent/dashboard/${docRef.id}`)
+      router.push(`/talent/dashboard/mock-id`) // Mock ID for now
     } catch (error) {
       console.error('Error creating talent profile:', error)
-      toast.error('Failed to create talent profile')
+      alert('Failed to create talent profile')
     } finally {
       setUploading(false)
     }
