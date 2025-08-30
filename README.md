@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Gig$wipe - Tinder-Style Job Matching Platform
 
 A modern, dark-themed Next.js application that connects local employers with talented employees through an intuitive Tinder-style matching interface.
@@ -297,3 +298,6 @@ For support and questions:
 ---
 
 **Gig$wipe** - Swipe less, work more! 🚀
+=======
+# syncshackGigSwitch
+>>>>>>> 64cb1638aed46e90619415afcfd5615d34b90985
