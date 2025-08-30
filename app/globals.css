@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-primary-black text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-turquoise hover:bg-accent-turquoise-dark text-primary-black font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-purple hover:bg-secondary-purple-dark text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-accent-turquoise text-accent-turquoise hover:bg-accent-turquoise hover:text-primary-black font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+  }
+  
+  .card {
+    @apply bg-primary-dark-gray rounded-xl shadow-2xl border border-neutral-gray-700;
+  }
+  
+  .input-field {
+    @apply bg-primary-dark-gray border border-neutral-gray-600 rounded-lg px-4 py-3 text-white placeholder-neutral-gray-600 focus:border-accent-turquoise focus:outline-none transition-colors;
+  }
+  
+  .tag {
+    @apply bg-accent-turquoise bg-opacity-20 text-accent-turquoise px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .personality-tag {
+    @apply bg-secondary-purple bg-opacity-20 text-secondary-purple px-3 py-1 rounded-full text-sm font-medium;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-turquoise to-secondary-purple bg-clip-text text-transparent;
+  }
+  
+  .bg-gradient {
+    @apply bg-gradient-to-br from-primary-black via-primary-dark-gray to-neutral-gray-800;
+  }
+  
+  .swipe-card {
+    @apply absolute w-full h-full transition-all duration-300 ease-out;
+  }
+  
+  .swipe-left {
+    @apply animate-swipe-left;
+  }
+  
+  .swipe-right {
+    @apply animate-swipe-right;
+  }
+}
