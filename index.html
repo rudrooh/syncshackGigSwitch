@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GigMatch - Find Work or Hire Talent</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-briefcase"></i>
+                <span>GigMatch</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#jobs" class="nav-link">Jobs</a>
+                <a href="#freelancers" class="nav-link">Freelancers</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-auth">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Connect with the Best Talent & Opportunities</h1>
+                <p class="hero-subtitle">Whether you're looking for work or hiring talent, GigMatch makes it easy to find the perfect match.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="switchToFreelancer()">
+                        <i class="fas fa-search"></i>
+                        Find Work
+                    </button>
+                    <button class="btn btn-secondary btn-large" onclick="switchToEmployer()">
+                        <i class="fas fa-users"></i>
+                        Hire Talent
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div class="card-header">
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop" alt="Job">
+                        <div class="card-overlay">
+                            <h3>Social Media Creator</h3>
+                            <p>Local Coffee Shop</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Type Toggle -->
+    <section class="toggle-section">
+        <div class="container">
+            <div class="toggle-container">
+                <div class="toggle-slider" id="toggleSlider"></div>
+                <button class="toggle-btn active" onclick="switchUserType('freelancer')" id="freelancerBtn">
+                    <i class="fas fa-search"></i>
+                    Find Work
+                </button>
+                <button class="toggle-btn" onclick="switchUserType('employer')" id="employerBtn">
+                    <i class="fas fa-users"></i>
+                    Hire Talent
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Instructions -->
+            <div class="instructions">
+                <p><i class="fas fa-lightbulb"></i> Click the buttons below to apply or pass, or use keyboard shortcuts (← →)</p>
+            </div>
+
+            <!-- Card Container -->
+            <div class="card-container">
+                <div class="card-stack">
+                    <!-- Background cards for depth -->
+                    <div class="card background-card" style="transform: scale(0.95) translateY(10px); opacity: 0.5;"></div>
+                    <div class="card background-card" style="transform: scale(0.9) translateY(20px); opacity: 0.3;"></div>
+                    
+                    <!-- Main card -->
+                    <div class="card main-card" id="mainCard">
+                        <div class="card-content" id="cardContent">
+                            <!-- Content will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn reject-btn" onclick="handleReject()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button class="action-btn apply-btn" onclick="handleApply()">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="action-btn favorite-btn">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats">
+                    <span id="statsText">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Match Modal -->
+    <div class="modal" id="matchModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎉 It's a Match!</h2>
+            </div>
+            <div class="modal-body">
+                <p id="matchMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeMatchModal()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GigMatch</h3>
+                    <p>Connecting talent with opportunity</p>
+                </div>
+                <div class="footer-section">
+                    <h4>For Freelancers</h4>
+                    <ul>
+                        <li><a href="#jobs">Browse Jobs</a></li>
+                        <li><a href="#profile">Create Profile</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="#post">Post a Job</a></li>
+                        <li><a href="#freelancers">Browse Talent</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GigMatch. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
